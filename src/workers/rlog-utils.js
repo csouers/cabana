@@ -155,6 +155,21 @@ export function getEgoData(state) {
     .concat(signedShortToByteArray(state.YawRate * 1000));
 }
 
+export function getControlsState(state) {
+  return signedShortToByteArray(state.ATarget * 1000);
+}
+
+export function getCarControl(state) {
+  return signedShortToByteArray(state.Gas * 1000)
+    .concat(signedShortToByteArray(state.Brake * 1000))
+    .concat(signedShortToByteArray(state.Steer * 1000))
+    .concat(signedLongToByteArray(state.SteerAngle * 1000));
+}
+
+export function getPlan(state) {
+  return signedShortToByteArray(state.ATarget * 1000);
+}
+
 export function getCarStateControls(state) {
   return signedLongToByteArray(state.SteeringAngle * 1000)
     .concat(signedShortToByteArray(state.Brake * 1000))

@@ -39,6 +39,38 @@ export const ego = {
   })
 };
 
+export const carcontrols = {
+  Gas: shortSignal({
+    index: 0,
+    factor: 0.001
+  }),
+  Brake: shortSignal({
+    index: 1,
+    factor: 0.001
+  }),
+  Steer: shortSignal({
+    index: 2,
+    factor: 0.001
+  }),
+  SteerAngle: longSignal({
+    index: 3,
+    factor: 0.001
+  })
+}
+export const plan = {
+  ATarget: shortSignal({
+    index: 0,
+    factor: 0.001
+  })
+};
+
+export const controlsstate = {
+  ATarget: shortSignal({
+    index: 0,
+    factor: 0.001
+  })
+};
+
 export const controls = {
   SteeringAngle: longSignal({
     index: 0,
@@ -194,6 +226,9 @@ export const thermalFreeSpace = {
 export const signalMap = {
   'CarState:WheelSpeeds': wheelSpeeds,
   'CarState:Ego': ego,
+  'CarControl:Actuators': carcontrols,
+  'Plan:Plan': plan,
+  'ControlsState:ControlsState': controlsstate,
   'CarState:Controls': controls,
   'CarState:Flags': flags,
   'UbloxGnss:MeasurementReport': ubloxGnss,

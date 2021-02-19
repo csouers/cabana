@@ -13,6 +13,9 @@ import {
   getUbloxGnss,
   getEgoData,
   getCarStateControls,
+  getControlsState,
+  getPlan,
+  getCarControl,
   getWheelSpeeds,
   getThermalFreeSpace,
   getThermalData,
@@ -175,6 +178,33 @@ async function loadData(entry) {
     } else if ('Can' in msg) {
       const monoTime = msg.LogMonoTime / 1000000000;
       msg.Can.forEach(partial(insertCanMessage, entry, monoTime));
+    } else if ('CarControl' in msg) {
+      const monoTime = msg.LogMonoTime / 1000000000;
+      insertEventData(
+        'CarControl',
+        'Actuators',
+        entry,
+        monoTime,
+        partial(getCarControl, msg.CarControl.Actuators)
+      );
+    } else if ('Plan' in msg) {
+      const monoTime = msg.LogMonoTime / 1000000000;
+      insertEventData(
+        'Plan',
+        'Plan',
+        entry,
+        monoTime,
+        partial(getPlan, msg.Plan)
+      );
+    } else if ('ControlsState' in msg) {
+      const monoTime = msg.LogMonoTime / 1000000000;
+      insertEventData(
+        'ControlsState',
+        'ControlsState',
+        entry,
+        monoTime,
+        partial(getControlsState, msg.ControlsState)
+      );
     } else if ('CarState' in msg) {
       const monoTime = msg.LogMonoTime / 1000000000;
       insertEventData(
